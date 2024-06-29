@@ -5,8 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
-import { localLogIn } from "../services/auth";
+import { ChangeEvent, useEffect, useState } from "react";
+import { User, getLocalUser, localLogIn } from "../services/auth";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -14,6 +14,11 @@ export default function LoginPage() {
     cpf: "",
     password: "",
   });
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    setUser(getLocalUser());
+  }, []);
 
   const canSubmit = Object.values(form).every(Boolean);
 
@@ -26,13 +31,17 @@ export default function LoginPage() {
     router.push("/donations");
   }
 
+  if (user) {
+    router.push("/donations");
+  }
+
   return (
     <div className="flex flex-col items-center space-y-10">
       <div className="space-y-3">
         <h1 className="text-center text-4xl font-bold">Login</h1>
 
         <p className="text-muted-foreground">
-          Faça o login para acompanhar as doações
+          Faça o login para consultar as doações
         </p>
       </div>
 
@@ -63,7 +72,7 @@ export default function LoginPage() {
 
         <Button
           className="!mt-6 w-full"
-          type="button"
+          type="submit"
           onClick={handleSubmit}
           disabled={!canSubmit}
         >

@@ -19,13 +19,16 @@ export default function Home() {
       <p className="text-2xl">Bem vindo ao canal de doações.</p>
 
       {user ? (
-        <Button asChild variant={"default"}>
-          <Link href="/donations">Ir para Doações</Link>
-        </Button>
+        <div className="flex-center flex-col gap-4">
+          <p className="text-lg">Olá, {user.name}</p>
+          <Button asChild variant={"default"}>
+            <Link href="/donations">Ir para Doações</Link>
+          </Button>
+        </div>
       ) : (
         <div className="flex-center flex-col space-y-4">
           <p className="text-center text-lg">
-            Faça login na plataforma para acessar suas doações
+            Faça login na plataforma para consultar as doações
           </p>
           <Button asChild variant={"default"} size={"lg"}>
             <Link href="/login" className="text-xl">

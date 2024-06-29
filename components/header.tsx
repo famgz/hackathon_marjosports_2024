@@ -19,7 +19,7 @@ export default function Header() {
 
   function handleLogout(): void {
     localLogOut();
-    router.refresh();
+    router.push("/");
   }
 
   return (
@@ -53,7 +53,7 @@ export default function Header() {
         <div className="flex items-center gap-4">
           {user ? (
             <>
-              <span>Olá {user.name}</span>
+              <span>Olá, {user.name}</span>
 
               <Button
                 variant={"outline"}

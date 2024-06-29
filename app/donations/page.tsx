@@ -47,7 +47,7 @@ export default function Donations() {
 
         <div className="flex-center flex-col gap-4">
           <p className="text-center text-lg">
-            Faça login na plataforma para acessar susas doações
+            Faça login na plataforma para consultar as doações
           </p>
           <Button asChild variant={"default"} size={"lg"}>
             <Link href="/login" className="text-xl">
