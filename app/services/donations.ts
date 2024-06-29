@@ -1,16 +1,20 @@
 "use server";
 
 import axios from "axios";
-import { Donation } from "../models/donation";
+
+export interface Donation {
+  cpf: string;
+  app_name: string;
+  valor: number;
+}
 
 export async function getDonations(cpf: string): Promise<Donation[]> {
+  const apiBaseUrl = "https://hackathon.marjosports.com.br/hackathon";
+
   try {
-    const res = await axios.get(
-      `https://hackathon.marjosports.com.br/hackathon?cpf=${cpf}`,
-      {
-        headers: { "api-key": process.env.NEXT_PUBLIC_API_KEY },
-      },
-    );
+    const res = await axios.get(`${apiBaseUrl}?cpf=${cpf}`, {
+      headers: { "api-key": process.env.NEXT_PUBLIC_API_KEY },
+    });
     return res.data;
   } catch (err) {
     if (err instanceof Error) {
