@@ -1,7 +1,7 @@
 export default function Home() {
   return (
-    <h1 className="flex h-full w-full max-w-[1024px] flex-1 items-center justify-center text-4xl font-bold">
-      Listagem de Doações
-    </h1>
+    <div className="flex-center mx-auto h-full w-full max-w-[1024px] flex-1">
+      <h1 className="text-center text-4xl font-bold">Rede de Doações</h1>
+    </div>
   );
 }
