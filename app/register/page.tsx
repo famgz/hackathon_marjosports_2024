@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 import { registerUser } from "../services/user";
+import { redirect } from "next/navigation";
 
 export default function LoginPage() {
   const [form, setForm] = useState({
@@ -21,16 +22,18 @@ export default function LoginPage() {
     setForm((prev) => ({ ...prev, [type]: ev.target.value }));
   }
 
-  async function handleSubmit() {
+  function handleSubmit() {
     if (!ableToSubmit) {
       return;
     }
 
-    await registerUser({
+    registerUser({
       ...form,
       appName: "donationTeste",
       isAdmin: false,
-    });
+    })
+      .then(redirect("/donations"))
+      .catch((err) => console.log(err));
   }
 
   return (

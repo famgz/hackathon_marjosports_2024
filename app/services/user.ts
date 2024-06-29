@@ -11,10 +11,25 @@ export interface DBUSer {
 }
 
 export async function registerUser(user: DBUSer) {
-  const apiBaseUrl = "http://localhost:8080/usuario";
+  const url = "http://localhost:8080/usuario";
 
   try {
-    await axios.post(apiBaseUrl, user);
+    return axios.post(url, user);
+  } catch (err) {
+    if (err instanceof Error) {
+      console.error(err.message);
+    } else {
+      console.error("Unexpected error", err);
+    }
+    return [];
+  }
+}
+
+export async function getCpfs() {
+  const url = "http://localhost:8080/usuario/cpfs";
+
+  try {
+    return axios.get(url);
   } catch (err) {
     if (err instanceof Error) {
       console.error(err.message);

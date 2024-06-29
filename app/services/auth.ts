@@ -1,3 +1,5 @@
+"use client";
+
 export interface User {
   id: string;
   name: string;
