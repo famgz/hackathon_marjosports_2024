@@ -20,19 +20,19 @@ const defaultUser = {
   password: "senha",
 };
 
-export function logIn() {
+export function localLogIn() {
   typeof window !== "undefined" &&
     localStorage?.setItem(localStorageKey, JSON.stringify(defaultUser));
 }
 
 export function getLocalUser(): User {
-  const localUser =
-    typeof window !== "undefined" && localStorage.getItem(localStorageKey);
+  // const localUser = typeof window !== "undefined" && localStorage.getItem(localStorageKey);
+  const localUser = localStorage.getItem(localStorageKey);
   const res = localUser ? JSON.parse(localUser) : null;
   return res;
 }
 
-export function logOut() {
+export function localLogOut() {
   typeof window !== "undefined" && localStorage.removeItem(localStorageKey);
 }
 

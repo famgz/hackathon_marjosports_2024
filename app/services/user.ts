@@ -26,7 +26,22 @@ export async function registerUser(user: DBUSer) {
 }
 
 export async function getCpfs() {
-  const url = "http://localhost:8080/usuario/cpfs";
+  const url = "http://localhost:8080/usuario/1";
+
+  try {
+    return axios.get(url);
+  } catch (err) {
+    if (err instanceof Error) {
+      console.error(err.message);
+    } else {
+      console.error("Unexpected error", err);
+    }
+    return [];
+  }
+}
+
+export async function logIn(cpf: string, password: string) {
+  const url = "http://localhost:8080/usuario/";
 
   try {
     return axios.get(url);

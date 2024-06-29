@@ -1,20 +1,26 @@
 "use client";
 
-import { getLocalUser } from "@/app/services/auth";
+import { User, getLocalUser, localLogOut } from "@/app/services/auth";
 import { CircleUserRoundIcon, LogInIcon, LogOutIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { User } from "../app/models/user";
 import { ModeToggle } from "./mode-toggle";
 import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const [user, setUser] = useState<User | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     setUser(getLocalUser());
   }, []);
+
+  function handleLogout(): void {
+    localLogOut();
+    router.refresh();
+  }
 
   return (
     <div className="w-full px-5">
@@ -45,20 +51,19 @@ export default function Header() {
 
         {/* Buttons */}
         <div className="flex items-center gap-4">
-          <ModeToggle />
           {user ? (
             <>
               <span>Olá {user.name}</span>
 
-              {/* <Button
+              <Button
                 variant={"outline"}
                 size={"default"}
-                onClick={() => {}}
+                onClick={handleLogout}
                 className="flex gap-2"
               >
                 <span className="hidden text-xl md:block">Sair</span>
                 <LogOutIcon />
-              </Button> */}
+              </Button>
 
               <Button variant={"outline"} size={"icon"}>
                 <CircleUserRoundIcon />
@@ -68,16 +73,16 @@ export default function Header() {
             <Button
               variant={"outline"}
               size={"default"}
-              onClick={() => {}}
               className="flex gap-2"
               asChild
             >
               <Link href="/login">
-                <span className="text-xl">Entrar</span>
+                <span className="hidden text-xl md:block">Entrar</span>
                 <LogInIcon />
               </Link>
             </Button>
           )}
+          <ModeToggle />
         </div>
       </div>
     </div>

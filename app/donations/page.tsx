@@ -13,10 +13,18 @@ import {
 import { useEffect, useState } from "react";
 import { Donation, getDonations } from "../services/donations";
 import { formatCurrency } from "@/lib/utils";
+import { User, getLocalUser } from "../services/auth";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Donations() {
   const cpf = "12345678900";
   const [donations, setDonations] = useState<Donation[]>([]);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    setUser(getLocalUser());
+  }, []);
 
   const total = donations.reduce((acc, curr) => acc + curr.valor, 0);
 
@@ -31,6 +39,25 @@ export default function Donations() {
     }
     get();
   }, []);
+
+  if (!user) {
+    return (
+      <div className="flex-center flex-col space-y-20">
+        <h1 className="text-center text-4xl font-bold">Extrato de Doações</h1>
+
+        <div className="flex-center flex-col gap-4">
+          <p className="text-center text-lg">
+            Faça login na plataforma para acessar susas doações
+          </p>
+          <Button asChild variant={"default"} size={"lg"}>
+            <Link href="/login" className="text-xl">
+              Entrar
+            </Link>
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex-center w-full flex-col space-y-10">

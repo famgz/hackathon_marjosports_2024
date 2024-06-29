@@ -16,14 +16,14 @@ export default function LoginPage() {
     password: "",
   });
 
-  const ableToSubmit = Object.values(form).every(Boolean);
+  const canSubmit = Object.values(form).every(Boolean);
 
   function handleChange(ev: ChangeEvent<HTMLInputElement>, type: string) {
     setForm((prev) => ({ ...prev, [type]: ev.target.value }));
   }
 
   function handleSubmit() {
-    if (!ableToSubmit) {
+    if (!canSubmit) {
       return;
     }
 
@@ -86,7 +86,7 @@ export default function LoginPage() {
           className="!mt-6 w-full"
           type="button"
           onClick={handleSubmit}
-          disabled={!ableToSubmit}
+          disabled={!canSubmit}
         >
           Cadastrar
         </Button>
