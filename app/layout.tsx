@@ -3,6 +3,7 @@ import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/mode-toggle";
+import Header from "@/components/header";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -10,8 +11,8 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Listagem de doações",
-  description: "Listagem de doações",
+  title: "Rede de doações",
+  description: "Rede de doações",
 };
 
 export default function RootLayout({
@@ -24,12 +25,13 @@ export default function RootLayout({
       <body className={roboto.className}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
-          <ModeToggle />
-          <div className="min-w-screen flex min-h-screen flex-col items-center justify-center">
+          <div className="min-w-screen flex min-h-screen flex-col">
+            <ModeToggle />
+            <Header />
             {children}
           </div>
         </ThemeProvider>
