@@ -1,9 +1,8 @@
-import type { Metadata } from "next";
-import { Inter, Roboto } from "next/font/google";
-import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
-import { ModeToggle } from "@/components/mode-toggle";
 import Header from "@/components/header";
+import { ThemeProvider } from "@/components/theme-provider";
+import type { Metadata } from "next";
+import { Roboto } from "next/font/google";
+import "./globals.css";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -30,9 +29,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="min-w-screen flex min-h-screen flex-col">
-            <ModeToggle />
             <Header />
-            {children}
+            <div className="flex-center relative mx-auto h-full w-full max-w-[1024px] flex-1 flex-col px-5 py-20">
+              {children}
+            </div>
           </div>
         </ThemeProvider>
       </body>

@@ -76,5 +76,5 @@
 }
 
 .flex-center {
-  @apply flex justify-center items-center text-center;
+  @apply flex justify-center items-center;
 }
