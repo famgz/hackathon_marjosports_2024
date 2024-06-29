@@ -1,4 +1,11 @@
-import { User } from "../models/user";
+export interface User {
+  id: string;
+  name: string;
+  app_name: string;
+  cpf: string;
+  isAdmin: boolean;
+  password: string;
+}
 
 const localStorageKey = "user";
 
